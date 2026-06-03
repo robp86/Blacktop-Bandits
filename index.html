@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blacktop Bandits | Sealcoating & Asphalt Maintenance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --charcoal: #1c1c1c;
+      --mid: #2a2a2a;
+      --yellow: #f5c518;
+      --gold: #d4a800;
+      --white: #f0ece4;
+      --grey: #888888;
+      --light-grey: #cccccc;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; font-weight: 400; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 72px;
+      background: rgba(10,10,10,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(245,197,24,0.15);
+    }
+    .nav-left { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+    .nav-logo-img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+    .nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.08em; color: var(--yellow); }
+    .nav-logo-text span { color: var(--white); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light-grey); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--yellow); }
+    .nav-cta { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--black); background: var(--yellow); padding: 0.55rem 1.4rem; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--gold); }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 5vw; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.85) 50%, rgba(10,10,10,0.97) 100%), repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(245,197,24,0.025) 40px, rgba(245,197,24,0.025) 41px); }
+    .hero-content { position: relative; z-index: 2; max-width: 900px; }
+    .hero-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--yellow); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards; }
+    .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 2px; background: var(--yellow); }
+    .hero-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--white); opacity: 0; animation: fadeUp 0.8s 0.4s ease forwards; }
+    .hero-headline em { color: var(--yellow); font-style: normal; }
+    .hero-sub { margin-top: 1.8rem; font-size: 1.05rem; font-weight: 300; color: var(--grey); max-width: 480px; line-height: 1.7; opacity: 0; animation: fadeUp 0.8s 0.6s ease forwards; }
+    .hero-actions { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.8s ease forwards; }
+    .btn-primary { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); background: var(--yellow); padding: 1rem 2.5rem; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.2s; box-shadow: 0 4px 24px rgba(245,197,24,0.25); }
+    .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+    .btn-secondary { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); background: transparent; padding: 1rem 2.5rem; text-decoration: none; display: inline-block; border: 1px solid rgba(240,236,228,0.25); transition: border-color 0.2s, color 0.2s; }
+    .btn-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
+    .hero-phone-wrap { opacity: 0; animation: fadeUp 0.8s 1s ease forwards; margin-top: 2.5rem; }
+    .hero-phone-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); display: block; margin-bottom: 0.2rem; }
+    .hero-phone { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.06em; color: var(--yellow); text-decoration: none; }
+    .hero-phone:hover { color: var(--gold); }
+
+    /* LOGO SECTION */
+    #logo-section { background: var(--dark); padding: 4rem 5vw; display: flex; align-items: center; justify-content: center; gap: 4rem; border-top: 1px solid rgba(245,197,24,0.1); border-bottom: 1px solid rgba(245,197,24,0.1); flex-wrap: wrap; }
+    .logo-big { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(245,197,24,0.3); }
+    .logo-taglines { display: flex; flex-direction: column; gap: 0.8rem; }
+    .logo-tagline { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); display: flex; align-items: center; gap: 0.8rem; }
+    .logo-tagline::before { content: '✦'; color: var(--yellow); font-size: 0.7rem; }
+
+    /* TICKER */
+    .ticker-wrap { background: var(--yellow); overflow: hidden; padding: 0.6rem 0; }
+    .ticker-track { display: flex; white-space: nowrap; animation: ticker 30s linear infinite; }
+    .ticker-item { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.12em; color: var(--black); padding: 0 3rem; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* SECTIONS */
+    section { padding: 8rem 5vw; }
+    .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--yellow); display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .section-label::before { content: ''; display: block; width: 30px; height: 2px; background: var(--yellow); }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 5vw, 4.5rem); letter-spacing: 0.03em; line-height: 1; color: var(--white); }
+    .section-title em { color: var(--yellow); font-style: normal; }
+
+    /* SERVICES */
+    #services { background: var(--dark); position: relative; }
+    #services::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--yellow), transparent); opacity: 0.3; }
+    .services-header { max-width: 600px; margin-bottom: 5rem; }
+    .services-header p { margin-top: 1.2rem; color: var(--grey); font-weight: 300; font-size: 1.05rem; line-height: 1.7; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: rgba(245,197,24,0.08); }
+    .service-card { background: var(--dark); padding: 2.8rem 2.2rem; transition: background 0.3s; position: relative; overflow: hidden; }
+    .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--yellow); transition: width 0.4s ease; }
+    .service-card:hover { background: var(--charcoal); }
+    .service-card:hover::after { width: 100%; }
+    .service-number { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: rgba(245,197,24,0.08); line-height: 1; margin-bottom: 1rem; }
+    .service-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--white); margin-bottom: 0.8rem; }
+    .service-desc { font-size: 0.92rem; color: var(--grey); line-height: 1.65; font-weight: 300; }
+
+    /* WHY */
+    #why { background: var(--black); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; margin-top: 4rem; }
+    .why-left .big-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5rem); line-height: 1; letter-spacing: 0.02em; color: var(--white); margin-bottom: 1.8rem; }
+    .why-left .big-text em { color: var(--yellow); font-style: normal; }
+    .why-left p { color: var(--grey); font-weight: 300; line-height: 1.75; font-size: 1rem; margin-bottom: 1.2rem; }
+    .why-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(245,197,24,0.1); margin-top: 3rem; }
+    .stat-box { background: var(--dark); padding: 2rem 1.5rem; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--yellow); line-height: 1; letter-spacing: 0.03em; }
+    .stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); margin-top: 0.4rem; }
+    .why-benefits { display: flex; flex-direction: column; gap: 1px; background: rgba(245,197,24,0.1); }
+    .benefit { background: var(--dark); padding: 1.8rem 2rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: background 0.2s; }
+    .benefit:hover { background: var(--charcoal); }
+    .benefit-icon { flex-shrink: 0; width: 36px; height: 36px; background: rgba(245,197,24,0.1); display: flex; align-items: center; justify-content: center; color: var(--yellow); }
+    .benefit-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); margin-bottom: 0.3rem; }
+    .benefit-text { font-size: 0.88rem; color: var(--grey); font-weight: 300; line-height: 1.6; }
+
+    /* STORY */
+    #story { background: var(--charcoal); position: relative; overflow: hidden; }
+    #story::before { content: '"'; position: absolute; top: -2rem; right: 4vw; font-family: 'Bebas Neue', sans-serif; font-size: 28rem; color: rgba(245,197,24,0.04); line-height: 1; pointer-events: none; }
+    .story-inner { max-width: 720px; position: relative; z-index: 2; }
+    .story-quote { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 600; line-height: 1.35; color: var(--white); margin: 2rem 0 2.5rem; }
+    .story-quote em { color: var(--yellow); font-style: normal; }
+    .story-body { font-size: 1rem; color: var(--grey); line-height: 1.8; font-weight: 300; margin-bottom: 1.2rem; }
+    .story-sig { margin-top: 3rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow); display: flex; align-items: center; gap: 1rem; }
+    .story-sig::before { content: ''; display: block; width: 30px; height: 1px; background: var(--yellow); }
+
+    /* WORK */
+    #work { background: var(--black); }
+    .work-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 2rem; }
+    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; background: var(--charcoal); }
+    .work-item { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+    .work-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%) brightness(0.8); transition: filter 0.5s, transform 0.5s; display: block; }
+    .work-item:hover img { filter: grayscale(0%) brightness(1); transform: scale(1.04); }
+    .work-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; display: flex; align-items: flex-end; padding: 1.5rem; }
+    .work-item:hover .work-overlay { opacity: 1; }
+    .work-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--yellow); background: rgba(0,0,0,0.7); padding: 0.3rem 0.8rem; }
+    .work-item-wide { grid-column: span 2; aspect-ratio: unset; height: 340px; }
+
+    /* AREA */
+    #area { background: var(--dark); }
+    .area-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: 4rem; }
+    .area-text p { color: var(--grey); font-weight: 300; line-height: 1.75; font-size: 1rem; margin-bottom: 1.5rem; }
+    .area-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 1.5rem; margin-top: 1.5rem; }
+    .area-list li { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--light-grey); display: flex; align-items: center; gap: 0.6rem; }
+    .area-list li::before { content: ''; display: block; width: 6px; height: 6px; background: var(--yellow); flex-shrink: 0; }
+    .area-codes { background: var(--charcoal); padding: 2.5rem; border-left: 3px solid var(--yellow); }
+    .area-codes h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow); margin-bottom: 1rem; }
+    .area-code-big { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; line-height: 1; letter-spacing: 0.04em; color: var(--white); }
+    .area-code-big span { color: var(--yellow); }
+    .area-codes p { color: var(--grey); font-size: 0.9rem; font-weight: 300; margin-top: 0.8rem; line-height: 1.6; }
+    .area-contact { margin-top: 3px; background: var(--charcoal); padding: 2rem 2.5rem; border-left: 3px solid rgba(245,197,24,0.3); }
+    .area-contact-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); margin-bottom: 0.6rem; }
+    .area-contact-phone { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.06em; color: var(--yellow); text-decoration: none; display: block; }
+    .area-contact p { font-size: 0.85rem; color: var(--grey); margin-top: 0.5rem; font-weight: 300; }
+
+    /* CTA */
+    #cta { background: var(--yellow); padding: 7rem 5vw; position: relative; overflow: hidden; }
+    #cta::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(0,0,0,0.04) 20px, rgba(0,0,0,0.04) 21px); }
+    .cta-inner { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 3rem; }
+    .cta-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.03em; color: var(--black); line-height: 1; }
+    .cta-text p { font-size: 1rem; color: rgba(0,0,0,0.6); margin-top: 0.8rem; font-weight: 400; max-width: 480px; line-height: 1.6; }
+    .cta-action { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .cta-phone { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; letter-spacing: 0.06em; color: var(--black); text-decoration: none; }
+    .cta-phone:hover { opacity: 0.7; }
+    .cta-phone-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(0,0,0,0.5); text-align: center; }
+    .btn-dark { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow); background: var(--black); padding: 1rem 2.5rem; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.2s; }
+    .btn-dark:hover { background: var(--charcoal); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: var(--black); border-top: 1px solid rgba(245,197,24,0.1); padding: 4rem 5vw 2.5rem; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .footer-brand { display: flex; flex-direction: column; gap: 0; }
+    .footer-logo-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem; }
+    .footer-logo-img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
+    .footer-brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.06em; color: var(--yellow); }
+    .footer-brand-name span { color: var(--white); }
+    .footer-brand p { font-size: 0.88rem; color: var(--grey); font-weight: 300; line-height: 1.7; max-width: 320px; }
+    .footer-phone { display: inline-block; margin-top: 1.5rem; font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.06em; color: var(--yellow); text-decoration: none; }
+    .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow); margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col ul li a { font-size: 0.88rem; color: var(--grey); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--yellow); }
+    .footer-bottom { padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.2); font-weight: 300; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .why-grid, .area-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .work-grid { grid-template-columns: 1fr 1fr; }
+      .work-item-wide { grid-column: span 2; height: 240px; }
+      .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+      .cta-inner { flex-direction: column; text-align: center; }
+      #logo-section { flex-direction: column; text-align: center; gap: 2rem; }
+    }
+    @media (max-width: 480px) {
+      .work-grid { grid-template-columns: 1fr; }
+      .work-item-wide { grid-column: span 1; height: 240px; }
+      section { padding: 5rem 5vw; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-left">
+    <img src="BTB1.jpg" alt="Blacktop Bandits Logo" class="nav-logo-img" />
+    <span class="nav-logo-text">Blacktop <span>Bandits</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Sealcoat</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#work">Our Work</a></li>
+    <li><a href="#area">Service Area</a></li>
+  </ul>
+  <a href="tel:2728920438" class="nav-cta">Free Estimate</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Blacktop Bandits — Est. Family Legacy</p>
+    <h1 class="hero-headline">Protect Your<br>Asphalt. <em>Boost</em><br>Your Curb<br>Appeal.</h1>
+    <p class="hero-sub">Professional sealcoating, crack filling, and asphalt maintenance for homes, businesses, and property managers. Free estimates, reliable service, quality results.</p>
+    <div class="hero-actions">
+      <a href="tel:2728920438" class="btn-primary">Get a Free Estimate</a>
+      <a href="#services" class="btn-secondary">Our Services</a>
+    </div>
+    <div class="hero-phone-wrap">
+      <span class="hero-phone-label">Call Us Anytime</span>
+      <a href="tel:2728920438" class="hero-phone">272-892-0438</a>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO SECTION -->
+<div id="logo-section">
+  <img src="BTB1.jpg" alt="Blacktop Bandits" class="logo-big" />
+  <div class="logo-taglines">
+    <div class="logo-tagline">Free Estimates</div>
+    <div class="logo-tagline">Reliable Service</div>
+    <div class="logo-tagline">Quality Results</div>
+    <div class="logo-tagline">Family Owned & Operated</div>
+    <div class="logo-tagline">Serving 272 & 570 Area Codes</div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">Sealcoating ✦</span>
+    <span class="ticker-item">Crack Filling ✦</span>
+    <span class="ticker-item">Line Striping ✦</span>
+    <span class="ticker-item">Asphalt Repairs ✦</span>
+    <span class="ticker-item">Free Estimates ✦</span>
+    <span class="ticker-item">Residential & Commercial ✦</span>
+    <span class="ticker-item">Serving 272 & 570 ✦</span>
+    <span class="ticker-item">Sealcoating ✦</span>
+    <span class="ticker-item">Crack Filling ✦</span>
+    <span class="ticker-item">Line Striping ✦</span>
+    <span class="ticker-item">Asphalt Repairs ✦</span>
+    <span class="ticker-item">Free Estimates ✦</span>
+    <span class="ticker-item">Residential & Commercial ✦</span>
+    <span class="ticker-item">Serving 272 & 570 ✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">All Your <em>Driveway</em> Needs</h2>
+    <p>From protecting a freshly laid driveway to reviving worn-out asphalt, we handle every aspect of pavement maintenance — residential and commercial.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal"><div class="service-number">01</div><div class="service-name">Sealcoating</div><p class="service-desc">Protect your asphalt from weather, UV damage, oil stains, and everyday wear. Extends pavement life and keeps it looking sharp.</p></div>
+    <div class="service-card reveal"><div class="service-number">02</div><div class="service-name">Crack Filling</div><p class="service-desc">Prevent water from getting under your pavement and causing costly structural damage. We seal cracks before they get worse.</p></div>
+    <div class="service-card reveal"><div class="service-number">03</div><div class="service-name">Line Striping</div><p class="service-desc">Clean, precise parking lot markings for commercial properties. Improve safety, organization, and curb appeal.</p></div>
+    <div class="service-card reveal"><div class="service-number">04</div><div class="service-name">Driveway Maintenance</div><p class="service-desc">Keep your residential driveway looking fresh, clean, and professionally maintained. Preventative care that protects your value.</p></div>
+    <div class="service-card reveal"><div class="service-number">05</div><div class="service-name">Asphalt Repairs</div><p class="service-desc">Potholes, surface damage, deteriorated sections — we repair and restore your asphalt to a solid, stable condition.</p></div>
+    <div class="service-card reveal"><div class="service-number">06</div><div class="service-name">Commercial Properties</div><p class="service-desc">Parking lots, apartment complexes, rental properties, and multi-property owners. Built around your schedule.</p></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="why-grid">
+    <div class="why-left reveal">
+      <p class="section-label">Why It Matters</p>
+      <div class="big-text">Your Driveway Is An <em>Investment.</em> Protect It.</div>
+      <p>Regular sealcoating dramatically extends the lifespan of your asphalt. Without it, sun, rain, freeze-thaw cycles, and oil slowly break down pavement from the surface down.</p>
+      <p>A properly maintained driveway not only looks better — it lasts 2–3 times longer and maintains your home's curb appeal and resale value.</p>
+      <p>Preventative maintenance costs a fraction of what full replacement runs. The results speak for themselves.</p>
+      <div class="why-stats">
+        <div class="stat-box"><div class="stat-num">3×</div><div class="stat-label">Longer Lifespan</div></div>
+        <div class="stat-box"><div class="stat-num">Free</div><div class="stat-label">Estimates</div></div>
+        <div class="stat-box"><div class="stat-num">100%</div><div class="stat-label">Quality Focus</div></div>
+        <div class="stat-box"><div class="stat-num">272<br>570</div><div class="stat-label">Area Codes Served</div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="why-benefits">
+        <div class="benefit"><div class="benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><div class="benefit-title">Blocks UV Damage</div><p class="benefit-text">UV rays oxidize and dry out asphalt causing cracks. Sealcoating acts as sunscreen for your pavement.</p></div></div>
+        <div class="benefit"><div class="benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg></div><div><div class="benefit-title">Water Resistance</div><p class="benefit-text">Seals the surface against rain and snowmelt infiltration that causes heaving, cracking, and potholes.</p></div></div>
+        <div class="benefit"><div class="benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="benefit-title">Oil & Chemical Resistance</div><p class="benefit-text">Resists petroleum spills and automotive fluids that break down the binder holding asphalt together.</p></div></div>
+        <div class="benefit"><div class="benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div><div class="benefit-title">Restores Appearance</div><p class="benefit-text">That rich dark-black finish dramatically improves curb appeal and makes your property look well-maintained.</p></div></div>
+        <div class="benefit"><div class="benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="benefit-title">Cost Effective</div><p class="benefit-text">Regular sealcoating costs a small fraction of full replacement. The smartest investment in your property.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="story-inner">
+    <p class="section-label reveal">Our Story</p>
+    <blockquote class="story-quote reveal">"A <em>Family Legacy</em> Built on Quality, Hard Work, and Honesty."</blockquote>
+    <p class="story-body reveal">I learned the sealcoating business from my father, who owned and operated his own company for years. He taught me that the work you put in always shows — in the finish, in the relationships you build, and in whether customers call you back.</p>
+    <p class="story-body reveal">After he passed away, I chose to continue the work he loved and carry on the values he instilled in me: hard work, honesty, and delivering quality results every single time. Today, I'm proud to serve homeowners and businesses throughout the area while honoring the legacy he built.</p>
+    <p class="story-body reveal">When you hire Blacktop Bandits, you're not hiring a faceless company. You're hiring a family business that cares about doing the job right — because we were taught that way.</p>
+    <div class="story-sig reveal">Blacktop Bandits — Serving Our Community</div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="work-header">
+    <div class="reveal">
+      <p class="section-label">Portfolio</p>
+      <h2 class="section-title">Our <em>Work</em></h2>
+    </div>
+    <a href="tel:2728920438" class="btn-primary reveal">Get Your Free Estimate</a>
+  </div>
+  <div class="work-grid">
+    <div class="work-item reveal">
+      <img src="BTB2.jpg" alt="Freshly sealcoated residential driveway" />
+      <div class="work-overlay"><span class="work-tag">Sealcoating</span></div>
+    </div>
+    <div class="work-item reveal">
+      <img src="BTB3.jpg" alt="Long driveway after sealcoating" />
+      <div class="work-overlay"><span class="work-tag">Residential</span></div>
+    </div>
+    <div class="work-item reveal">
+      <img src="BTB4.jpg" alt="Ranch home sealed driveway" />
+      <div class="work-overlay"><span class="work-tag">Sealcoating</span></div>
+    </div>
+    <div class="work-item work-item-wide reveal">
+      <img src="BTB5.jpg" alt="Deep black freshly sealcoated driveway" />
+      <div class="work-overlay"><span class="work-tag">Fresh Asphalt</span></div>
+    </div>
+    <div class="work-item reveal">
+      <img src="BTB8.jpg" alt="Completed driveway project" />
+      <div class="work-overlay"><span class="work-tag">Completed Job</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section id="area">
+  <p class="section-label reveal">Where We Work</p>
+  <h2 class="section-title reveal">Proudly <em>Serving</em> NEPA & Beyond</h2>
+  <div class="area-inner">
+    <div class="area-text reveal">
+      <p>We serve homeowners, businesses, property managers, and multi-property owners throughout Northeastern and North-Central Pennsylvania. If you're in the 272 or 570 area code, we've got you covered.</p>
+      <p>Don't see your city listed? Give us a call — we regularly work throughout the region and are happy to travel for larger jobs.</p>
+      <ul class="area-list">
+        <li>Scranton</li><li>Wilkes-Barre</li>
+        <li>Williamsport</li><li>Dunmore</li>
+        <li>Pittston</li><li>Hazleton</li>
+        <li>Kingston</li><li>Carbondale</li>
+        <li>Nanticoke</li><li>Stroudsburg</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="area-codes">
+        <h3>Area Codes Served</h3>
+        <div class="area-code-big"><span>272</span> &amp; <span>570</span></div>
+        <p>Covering Scranton, Wilkes-Barre, Williamsport, and surrounding communities throughout Northeastern Pennsylvania.</p>
+      </div>
+      <div class="area-contact">
+        <p class="area-contact-label">Contact Us</p>
+        <a href="tel:2728920438" class="area-contact-phone">272-892-0438</a>
+        <p>Free estimates for all residential and commercial projects.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="cta-text">
+      <h2>Don't Wait Until Small Cracks Become Expensive Repairs.</h2>
+      <p>Get a free estimate today and protect your asphalt for years to come. Reliable, honest service from a family business that takes pride in every job.</p>
+    </div>
+    <div class="cta-action">
+      <span class="cta-phone-label">Call For a Free Estimate</span>
+      <a href="tel:2728920438" class="cta-phone">272-892-0438</a>
+      <a href="tel:2728920438" class="btn-dark">Schedule Today</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-row">
+        <img src="BTB1.jpg" alt="Blacktop Bandits" class="footer-logo-img" />
+        <span class="footer-brand-name">Blacktop <span>Bandits</span></span>
+      </div>
+      <p>A family legacy built on quality, honesty, and results. Serving homes and businesses throughout Northeastern Pennsylvania.</p>
+      <a href="tel:2728920438" class="footer-phone">272-892-0438</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Sealcoating</a></li>
+        <li><a href="#services">Crack Filling</a></li>
+        <li><a href="#services">Line Striping</a></li>
+        <li><a href="#services">Asphalt Repairs</a></li>
+        <li><a href="#services">Driveway Maintenance</a></li>
+        <li><a href="#services">Commercial Properties</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#work">Our Work</a></li>
+        <li><a href="#area">Service Area</a></li>
+        <li><a href="#why">Why Sealcoat</a></li>
+        <li><a href="tel:2728920438">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Blacktop Bandits. All rights reserved.</p>
+    <p>Scranton · Wilkes-Barre · Williamsport · NEPA</p>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.services-grid .service-card, .why-benefits .benefit').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
