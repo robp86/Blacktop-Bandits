@@ -3,14 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blacktop Bandits | Sealcoating & Asphalt Maintenance</title>
+  <meta name="description" content="Blacktop Bandits provides sealcoating, crack filling, driveway maintenance, and asphalt protection for homes and businesses across Scranton, Wilkes-Barre, Williamsport, and NEPA." />
+  <meta name="keywords" content="sealcoating NEPA, driveway sealcoating Scranton PA, asphalt maintenance Wilkes-Barre, crack filling Williamsport PA, Blacktop Bandits" />
+  <meta name="author" content="Blacktop Bandits" />
+  <title>Blacktop Bandits | Sealcoating & Asphalt Maintenance in NEPA</title>
+  <meta property="og:title" content="Blacktop Bandits | Sealcoating & Asphalt Maintenance" />
+  <meta property="og:description" content="Family-owned sealcoating and asphalt maintenance serving Scranton, Wilkes-Barre, Williamsport, and surrounding NEPA communities." />
+  <meta property="og:url" content="https://blacktop-bandits.netlify.app/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blacktop Bandits | Sealcoating & Asphalt Maintenance" />
+  <meta name="twitter:description" content="Sealcoating, crack filling, and asphalt maintenance across NEPA." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
       --black: #0a0a0a;
-      --dark: #111111;
+      --dark: #906b6b;
       --charcoal: #1c1c1c;
       --mid: #2a2a2a;
       --yellow: #f5c518;
@@ -200,6 +210,71 @@
       .work-item-wide { grid-column: span 1; height: 240px; }
       section { padding: 5rem 5vw; }
     }
+    .estimate-form {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+  max-width: 640px;
+  margin: 24px auto 0;
+}
+
+.estimate-form input,
+.estimate-form select,
+.estimate-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  font: inherit;
+}
+
+.estimate-form input::placeholder,
+.estimate-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.estimate-form button {
+  padding: 15px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--black);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+.sticky-call-button {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  display: none;
+  padding: 16px 20px;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--black);
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 768px) {
+  .sticky-call-button {
+    display: block;
+  }
+
+  body {
+    padding-bottom: 86px;
+  }
+}
   </style>
 </head>
 <body>
@@ -385,7 +460,32 @@
       <div class="area-contact">
         <p class="area-contact-label">Contact Us</p>
         <a href="tel:2728920438" class="area-contact-phone">272-892-0438</a>
+        <a href="mailto:Amandamgreen29@outlook.com" class="area-contact-phone">Amandamgreen29@outlook.com</a>
         <p>Free estimates for all residential and commercial projects.</p>
+        <form name="estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="estimate-form" action="/thank-you.html">
+  <input type="hidden" name="form-name" value="estimate">
+
+  <p class="hidden">
+    <label>Don’t fill this out: <input name="bot-field"></label>
+  </p>
+
+  <input name="name" type="text" placeholder="Your name" required>
+  <input name="phone" type="tel" placeholder="Phone number" required>
+  <input name="email" type="email" placeholder="Email address">
+  <input name="address" type="text" placeholder="Property address / town">
+
+  <select name="service" required>
+    <option value="">What do you need?</option>
+    <option value="Sealcoating">Sealcoating</option>
+    <option value="Crack Filling">Crack Filling</option>
+    <option value="Asphalt Maintenance">Asphalt Maintenance</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <textarea name="message" placeholder="Tell us about the job" rows="5"></textarea>
+
+  <button type="submit">Request Free Estimate</button>
+</form>
       </div>
     </div>
   </div>
@@ -440,7 +540,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Blacktop Bandits. All rights reserved.</p>
+    <p>© <span id="year"></span> Blacktop Bandits. All rights reserved.</p>
     <p>Scranton · Wilkes-Barre · Williamsport · NEPA</p>
   </div>
 </footer>
@@ -464,6 +564,12 @@
       if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
     });
   });
+</script>
+<a class="sticky-call-button" href="tel:2728920438">
+  Call for Free Estimate
+</a>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
