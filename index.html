@@ -3,24 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Blacktop Bandits provides sealcoating, crack filling, driveway maintenance, and asphalt protection for homes and businesses across Scranton, Wilkes-Barre, Williamsport, and NEPA." />
-  <meta name="keywords" content="sealcoating NEPA, driveway sealcoating Scranton PA, asphalt maintenance Wilkes-Barre, crack filling Williamsport PA, Blacktop Bandits" />
-  <meta name="author" content="Blacktop Bandits" />
-  <title>Blacktop Bandits | Sealcoating & Asphalt Maintenance in NEPA</title>
-  <meta property="og:title" content="Blacktop Bandits | Sealcoating & Asphalt Maintenance" />
-  <meta property="og:description" content="Family-owned sealcoating and asphalt maintenance serving Scranton, Wilkes-Barre, Williamsport, and surrounding NEPA communities." />
-  <meta property="og:url" content="https://blacktop-bandits.netlify.app/" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Blacktop Bandits | Sealcoating & Asphalt Maintenance" />
-  <meta name="twitter:description" content="Sealcoating, crack filling, and asphalt maintenance across NEPA." />
+  <title>Blacktop Bandits | Sealcoating & Asphalt Maintenance</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
       --black: #0a0a0a;
-      --dark: #0b0000;
+      --dark: #111111;
       --charcoal: #1c1c1c;
       --mid: #2a2a2a;
       --yellow: #f5c518;
@@ -224,16 +214,21 @@
   width: 100%;
   box-sizing: border-box;
   padding: 14px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  color: inherit;
+  background: rgba(17, 17, 17, 0.95);
+  color: var(--white);
   font: inherit;
 }
 
 .estimate-form input::placeholder,
 .estimate-form textarea::placeholder {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(240, 236, 228, 0.7);
+}
+
+.estimate-form select option {
+  background: #111111;
+  color: #f0ece4;
 }
 
 .estimate-form button {
@@ -248,32 +243,6 @@
 
 .hidden {
   display: none;
-}
-.sticky-call-button {
-  position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  z-index: 9999;
-  display: none;
-  padding: 16px 20px;
-  border-radius: 999px;
-  background: var(--yellow);
-  color: var(--black);
-  font-weight: 800;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-@media (max-width: 768px) {
-  .sticky-call-button {
-    display: block;
-  }
-
-  body {
-    padding-bottom: 86px;
-  }
 }
   </style>
 </head>
@@ -292,7 +261,7 @@
     <li><a href="#work">Our Work</a></li>
     <li><a href="#area">Service Area</a></li>
   </ul>
-  <a href="tel:2728920438" class="nav-cta">Free Estimate</a>
+  <a href="#estimate" class="nav-cta">Free Estimate</a>
 </nav>
 
 <!-- HERO -->
@@ -303,7 +272,7 @@
     <h1 class="hero-headline">Protect Your<br>Asphalt. <em>Boost</em><br>Your Curb<br>Appeal.</h1>
     <p class="hero-sub">Professional sealcoating, crack filling, and asphalt maintenance for homes, businesses, and property managers. Free estimates, reliable service, quality results.</p>
     <div class="hero-actions">
-      <a href="tel:2728920438" class="btn-primary">Get a Free Estimate</a>
+      <a href="#estimate" class="btn-primary">Get a Free Estimate</a>
       <a href="#services" class="btn-secondary">Our Services</a>
     </div>
     <div class="hero-phone-wrap">
@@ -460,9 +429,8 @@
       <div class="area-contact">
         <p class="area-contact-label">Contact Us</p>
         <a href="tel:2728920438" class="area-contact-phone">272-892-0438</a>
-       <a href="mailto:Amandamgreen29@outlook.com?subject=Free%20Estimate%20Request" class="area-contact-phone">Amandamgreen29@outlook.com</a>
         <p>Free estimates for all residential and commercial projects.</p>
-        <form name="estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="estimate-form" action="/thank-you.html">
+        <form id="estimate" name="estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="estimate-form" action="/thank-you.html">
   <input type="hidden" name="form-name" value="estimate">
 
   <p class="hidden">
@@ -540,7 +508,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© <span id="year"></span> Blacktop Bandits. All rights reserved.</p>
+    <p>© 2025 Blacktop Bandits. All rights reserved.</p>
     <p>Scranton · Wilkes-Barre · Williamsport · NEPA</p>
   </div>
 </footer>
@@ -564,12 +532,6 @@
       if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
     });
   });
-</script>
-<a class="sticky-call-button" href="tel:2728920438">
-  Call for Free Estimate
-</a>
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
